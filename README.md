@@ -55,6 +55,14 @@ This tutorial will be using the following subset of basic Telnyx Call Control Co
 - [Call Control Speak](https://developers.telnyx.com/docs/api/v1/call-control/Call-Commands#CallControlSpeak)
 - [Call Control Dial](https://developers.telnyx.com/docs/api/v1/call-control/Call-Commands#CallControlDial)
 
+Plus all the Telnyx Call Control Conference Commands:
+
+- [Call Control Join Conference](https://developers.telnyx.com/docs/api/v1/call-control/Conference-Commands#JoinConference)
+- [Call Control Mute Conference Participant](https://developers.telnyx.com/docs/api/v1/call-control/Conference-Commands#MuteConference)
+- [Call Control Unmute Conference Participant](https://developers.telnyx.com/docs/api/v1/call-control/Conference-Commands#UnmuteConference)
+- [Call Control Hold Conference Participant](https://developers.telnyx.com/docs/api/v1/call-control/Conference-Commands#HoldConference)
+- [Call Control Unhold Conference Participant](https://developers.telnyx.com/docs/api/v1/call-control/Conference-Commands#UnholdConference)
+
 
 You can get the full set of available Telnyx Call Control Commands [here](https://developers.telnyx.com/docs/api/v1/overview).
 
