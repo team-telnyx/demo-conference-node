@@ -13,6 +13,7 @@ In this tutorial, you’ll learn how to:
 - [Prerequisites](#prerequisites)
 - [Telnyx Call Control Basics](#telnyx-call-control-basics)
   - [Understanding the Command Syntax](#understanding-the-command-syntax)
+  - [Telnyx Call Control Basic Set](#telnyx-call-control-basic-set)
   - [Telnyx Call Control Conference Commands](#telnyx-call-control-conference-commands)
 - [Building a Conference System](#building-a-conference-system)
 - [Interacting with the Conference Room](#interacting-with-the-conference-room)
@@ -180,7 +181,7 @@ For that we are using making use of the node's `request` module:
 });  
 ```
 
-### Telnyx Call Control Commands
+### Telnyx Call Control Basic Set
 
 This is how every Telnyx Call Control Command used in this application look like:
 
@@ -311,6 +312,7 @@ function call_control_speak(f_telnyx_api_key_v1, f_telnyx_api_secret_v1, f_call_
 }
 ```
 
+### Telnyx Call Control Conference Commands
 This is how every Telnyx Call Control Conference Commands look like:
 
 
@@ -522,7 +524,7 @@ function call_control_unhold(f_telnyx_api_key_v1, f_telnyx_api_secret_v1, f_conf
 Because Call Control is stateless and async your application will be receiving several events of the same type, e.g. user just included `DTMF`. With `Client State` you enforce a unique ID to be sent back to Telnyx which be used within a particular Command flow and identifying it as being at Level 2 of a certain IVR for example.
 
 
-## Building a Building a Conference System
+## Building a Conference System
 
 With all the basic and conference related Telnyx Call Control Commands set, we are ready to put them in the order that will create a simple Conference System. For that all we are going to do is to: 
 
@@ -531,8 +533,8 @@ With all the basic and conference related Telnyx Call Control Commands set, we a
 3. maintain a participant list 
 4. greet the new participants before place them on the conference room
 5. put the first participant automatically on hold 
-6. put a participant on-hold everytime he's the only participant on the conference room 
-7. un-hold the unique participant on the conference room when the seccond arrives
+6. put a participant on-hold every-time he's the only participant on the conference room 
+7. un-hold the unique participant on the conference room when the second arrives
 8. allow remote commands to list participants, force hold/unhold, force mute/unmute, force participant push 
 
 
@@ -721,7 +723,7 @@ As part of the process of building a Conference Room, there is also the possibil
 
 ### `Listing Participants`
 
-https://<webhook_domain>:8081/telnyx-conf/list
+*https://<webhook_domain>:8081/telnyx-conf/list*
 
 ```js
 rest.get('/' + g_appName + '/list', function (req, res) {
@@ -748,7 +750,7 @@ rest.get('/' + g_appName + '/list', function (req, res) {
 
 ### `Mute Participant`
 
-https://<webhook_domain>:8081/telnyx-conf/mute?participant=x
+*https://<webhook_domain>:8081/telnyx-conf/mute?participant=x*
 
 ```js
 rest.get('/' + g_appName + '/mute', function (req, res) {
@@ -768,7 +770,7 @@ rest.get('/' + g_appName + '/mute', function (req, res) {
 
 ### `Unute Participant`
 
-https://<webhook_domain>:8081/telnyx-conf/unmute?participant=x
+*https://<webhook_domain>:8081/telnyx-conf/unmute?participant=x*
 
 ```js
 rest.get('/' + g_appName + '/unmute', function (req, res) {
@@ -788,7 +790,7 @@ rest.get('/' + g_appName + '/unmute', function (req, res) {
 
 ### `Hold Participant`
 
-https://<webhook_domain>:8081/telnyx-conf/hold?participant=x
+*https://<webhook_domain>:8081/telnyx-conf/hold?participant=x*
 
 ```js
 rest.get('/' + g_appName + '/hold', function (req, res) {
@@ -809,7 +811,7 @@ rest.get('/' + g_appName + '/hold', function (req, res) {
 
 ### `Unhold Participant`
 
-https://<webhook_domain>:8081/telnyx-conf/unhold?participant=x
+*https://<webhook_domain>:8081/telnyx-conf/unhold?participant=x*
 
 ```js
 rest.get('/' + g_appName + '/unhold', function (req, res) {
@@ -829,7 +831,7 @@ rest.get('/' + g_appName + '/unhold', function (req, res) {
 
 ### `Pull Participant`
 
-https://<webhook_domain>:8081/telnyx-conf/pull?number=x
+*https://<webhook_domain>:8081/telnyx-conf/pull?number=x*
 
 ```js
 rest.get('/' + g_appName + '/pull', function (req, res) {
