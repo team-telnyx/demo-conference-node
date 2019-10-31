@@ -391,38 +391,6 @@ function call_control_dial(f_telnyx_api_key_v1, f_telnyx_api_secret_v1, f_dest, 
     });
 }
 
-
-// TELNYX CALL CONTROL API - Play Audio
-
-function call_control_play(f_telnyx_api_key_v1, f_telnyx_api_secret_v1, f_call_control_id, f_audio_url) {
-
-    var l_cc_action = 'playback_start';
-
-    var options = {
-        url: 'https://api.telnyx.com/calls/' +
-            f_call_control_id +
-            '/actions/' +
-            l_cc_action,
-
-        auth: {
-            username: f_telnyx_api_key_v1,
-            password: f_telnyx_api_secret_v1
-        },
-
-        json: {
-            audio_url: f_audio_url
-        }
-    };
-
-    request.post(options, function (err, resp, body) {
-        if (err) {
-            return console.log(err);
-        }
-        console.log("[%s] DEBUG - Command Executed [%s]", get_timestamp(), l_cc_action);
-        console.log(body);
-    });
-}
-
 // TELNYX CALL CONTROL API - SPEAK
 function call_control_speak(f_telnyx_api_key_v1, f_telnyx_api_secret_v1, f_call_control_id, f_tts_text) {
 
