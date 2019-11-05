@@ -1,0 +1,5 @@
+{
+    "telnyx_api_auth_v2": "<your-api-v2-key-here>",
+    "telnyx_waiting_url": "<your-path-to-waiting-song-here>",
+    "telnyx_connection_id": "<your-call-control-connection-id>"
+}
