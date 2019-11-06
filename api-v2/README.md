@@ -654,7 +654,7 @@ if (g_conf_id == 'no-conf') {
         'We are now putting you on the conference room. '
     );
 
-    call_control_join_conf(g_telnyx_api_key_v1, g_telnyx_api_secret_v1, l_call_control_id, g_conf_id, 'agent-in');
+    call_control_join_conf(g_telnyx_api_auth_v2, l_call_control_id, g_conf_id, 'agent-in');
 
     // Add Participant to the Participant List
     if (!l_client_state_64)
