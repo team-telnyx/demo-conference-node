@@ -867,7 +867,7 @@ rest.get('/' + g_appName + '/pull', function (req, res) {
 
     // Dial-out to specific number to pull participant
 
-    call_control_dial(g_telnyx_api_key_v1, g_telnyx_api_secret_v1, req.query.number, "conf", g_telnyx_connection_id);
+    call_control_dial(g_telnyx_api_auth_v2, req.query.number, "conf", g_telnyx_connection_id);
     res.end("called " + req.query.number);
 })
 ```
