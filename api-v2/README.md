@@ -1,5 +1,5 @@
-# Telnyx Conference System Demo
-Telnyx Conference System demo built on Call Control and node.js.
+# Telnyx Conference System Demo (API v2)
+Telnyx Conference System demo built on Call Control API V2 and node.js.
 
 
 In this tutorial, you’ll learn how to:
