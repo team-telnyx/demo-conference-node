@@ -678,6 +678,7 @@ rest.post('/' + g_appName + '/start', function (req, res) {
         l_hook_event_type == 'gather.ended' ||
         l_hook_event_type == 'call.bridged' ||
         l_hook_event_type == 'dtmf' ||
+        l_hook_event_type == 'call.recording.saved' ||
         l_hook_event_type == 'playback.started') { // ===========> Anything Else >> 200ok
 
         res.end();
