@@ -468,7 +468,63 @@ function call_control_speak(f_telnyx_api_auth_v2, f_call_control_id, f_tts_text)
 }
 
 
+// TELNYX CALL CONTROL API - Recording Start
+function call_control_record_start(f_telnyx_api_auth_v2, f_call_control_id) {
 
+    var cc_action = 'record_start'
+
+    var options = {
+        url: 'https://api.telnyx.com/v2/calls/' +
+            f_call_control_id +
+            '/actions/' +
+            cc_action,
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + f_telnyx_api_auth_v2
+        },
+        json: {
+            format: 'mp3',
+            channels: 'dual'
+        }
+    };
+
+    request.post(options, function (err, resp, body) {
+        if (err) {
+            return console.log(err);
+        }
+        console.log("[%s] DEBUG - Command Executed [%s]", get_timestamp(), cc_action);
+        console.log(body);
+    });
+}
+
+
+// TELNYX CALL CONTROL API - Recording Stop
+function call_control_record_stop(f_telnyx_api_auth_v2, f_call_control_id) {
+
+    var cc_action = 'record_stop'
+
+    var options = {
+        url: 'https://api.telnyx.com/v2/calls/' +
+            f_call_control_id +
+            '/actions/' +
+            cc_action,
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + f_telnyx_api_auth_v2
+        },
+        json: {}
+    };
+
+    request.post(options, function (err, resp, body) {
+        if (err) {
+            return console.log(err);
+        }
+        console.log("[%s] DEBUG - Command Executed [%s]", get_timestamp(), cc_action);
+        console.log(body);
+    });
+}
 
 
 
@@ -727,9 +783,26 @@ rest.get('/' + g_appName + '/unhold', function (req, res) {
 
 })
 
+// GET - Participant Recording Start: https://<webhook_domain>:8081/telnyx-conf-v2/record-start?participant=x
+
+
+rest.get('/' + g_appName + '/record-start', function (req, res) {
+    call_control_record_start(g_telnyx_api_auth_v2, req.query.participant);
+    res.end("recording started for " + req.query.participant);
+})
+
+// GET - Participant Recording Stop: https://<webhook_domain>:8081/telnyx-conf-v2/record-stop?participant=x
+
+rest.get('/' + g_appName + '/record-stop', function (req, res) {
+    call_control_record_stop(g_telnyx_api_auth_v2, req.query.participant);
+    res.end("recording stopped for " + req.query.participant);
+})
+
 
 // GET - Pull Participant: https://<webhook_domain>:8081/telnyx-conf/pull?number=%2Bx
 
+// Note: using "conf" as Caller ID will make Telnyx to decided what Caller ID to use, i.e. local or anonymous call
+//       You can change that behavior by adding the specific Caller ID number you wan't to be used
 
 rest.get('/' + g_appName + '/pull', function (req, res) {
     call_control_dial(g_telnyx_api_auth_v2, req.query.number, "conf", g_telnyx_connection_id);

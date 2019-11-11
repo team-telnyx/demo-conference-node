@@ -316,6 +316,66 @@ function call_control_speak(f_telnyx_api_auth_v2, f_call_control_id, f_tts_text)
 }
 ```
 
+#### Call Control Recording Start
+
+```js
+function call_control_record_start(f_telnyx_api_auth_v2, f_call_control_id) {
+
+    var cc_action = 'record_start'
+
+    var options = {
+        url: 'https://api.telnyx.com/v2/calls/' +
+            f_call_control_id +
+            '/actions/' +
+            cc_action,
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + f_telnyx_api_auth_v2
+        },
+        json: {
+            format: 'mp3',
+            channels: 'dual'
+        }
+    };
+
+    request.post(options, function (err, resp, body) {
+        if (err) {
+            return console.log(err);
+        }
+    });
+}
+```
+
+#### Call Control Recording Stop
+
+```js
+function call_control_record_stop(f_telnyx_api_auth_v2, f_call_control_id) {
+
+    var cc_action = 'record_stop'
+
+    var options = {
+        url: 'https://api.telnyx.com/v2/calls/' +
+            f_call_control_id +
+            '/actions/' +
+            cc_action,
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + f_telnyx_api_auth_v2
+        },
+        json: {}
+    };
+
+    request.post(options, function (err, resp, body) {
+        if (err) {
+            return console.log(err);
+        }
+    });
+}
+```
+
+
 ### Telnyx Call Control Conference Commands
 This is how every Telnyx Call Control Conference Commands look like:
 
@@ -871,6 +931,30 @@ rest.get('/' + g_appName + '/pull', function (req, res) {
     res.end("called " + req.query.number);
 })
 ```
+
+
+### `Start Recording Call Leg`
+
+*https://<webhook_domain>:8081/telnyx-conf-v2/record-start?participant=x*
+
+```js
+rest.get('/' + g_appName + '/record-start', function (req, res) {
+    call_control_record_start(g_telnyx_api_auth_v2, req.query.participant);
+    res.end("recording started for " + req.query.participant);
+})
+```
+
+### `Stop Recording Call Leg`
+
+*https://<webhook_domain>:8081/telnyx-conf-v2/record-stop?participant=x*
+
+```js
+rest.get('/' + g_appName + '/record-stop', function (req, res) {
+    call_control_record_stop(g_telnyx_api_auth_v2, req.query.participant);
+    res.end("recording stopped for " + req.query.participant);
+})
+```
+
 
 
 ## Lightning-Up the Application
